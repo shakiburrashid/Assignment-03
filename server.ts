@@ -1,10 +1,17 @@
 import express, { Request, Response } from 'express'
+import vehicleCall from './src/Config/Database.js';
+import router from './src/Module/User/user.route.js';
+import config from './src/Config/ConfigEnv.js';
+
+
+
 const app = express()
 app.use(express.json())
-const port = 3000;
+const port = config.Port || 3000;
 
-app.get('/', (req: Request, res: Response) => {
-    console.log("Hello Islami World")
+vehicleCall()
+app.use('/', router)
+
+app.listen(port, ()=> {
+    console.log(`Server is runing http://localhost:${port}`)
 })
-
-console.log("hi")
