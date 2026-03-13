@@ -67,7 +67,55 @@ const users_account = async (req: Request, res: Response) => {
     }
 }
 
+const account_edit = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        const { name, email, password, phone_number } = req.body
+        const result = await userService.account_edit(name, email, password, phone_number, id as string)
+        if (result.rows.length === 0) {
+            res.status(404).json({
+                success: false,
+                message: "Accout doesn't exist"
+            })
+        } else {
+            res.status(200).json({
+                success: true,
+                message: "Account Successfully edited",
+                data: result.rows[0]
+            })
+        }
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
 
+
+const account_delete = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        const result = await userService.account_delete( id as string)
+        if (result.rows.length === 0) {
+            res.status(404).json({
+                success: false,
+                message: "Accout doesn't exist"
+            })
+        } else {
+            res.status(200).json({
+                success: true,
+                message: "Account Successfully delete",
+                data: result.rows
+            })
+        }
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
 
 
 
@@ -77,5 +125,7 @@ const users_account = async (req: Request, res: Response) => {
 export const userControll = {
     createAccount,
     account_show,
-    users_account
+    users_account,
+    account_edit,
+    account_delete
 }

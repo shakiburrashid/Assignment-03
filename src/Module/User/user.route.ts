@@ -10,6 +10,10 @@ router.get('/accounts_get',userControll.account_show)
 
 router.get('/users_account/:id',userControll.users_account)
 
+router.put('/account_edit/:id',userControll.account_edit)
+
+router.delete('/account_delete/:id',userControll.account_delete)
+
 
 
 
