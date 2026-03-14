@@ -35,11 +35,10 @@ const vehicleCall = async () => {
  `),
 
  await vehicleRent.query(`
-    
     CREATE TABLE IF NOT EXISTS bookings (
     id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL REFERENCES users(id),
-    vehicle_id INT NOT NULL REFERENCES vehicles(id),
+    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    vehicle_id INT NOT NULL REFERENCES vehicles(id) ON DELETE CASCADE,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     booking_status VARCHAR(20) NOT NULL 
