@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { userService } from "./user.service.js";
-import strict from "node:assert/strict";
 
 // Account Created
 const createAccount = async (req: Request, res: Response) => {
